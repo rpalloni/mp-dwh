@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: users
+        description: "Postgres export users table"
+        columns:
+          - name: user_id
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+              - unique:
+                  config:
+                    severity: error
+                    
+      - name: events
+        description: "Event stream 3rd party booking tool"
+        columns:
+          - name: event_id
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+              - unique:
+                  config:
+                    severity: error
+          - name: user_id
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+
+      - name: mentors
+        description: "Manual Google Sheet export"
+        columns:
+          - name: mentor_id
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+              - unique:
+                  config:
+                    severity: error

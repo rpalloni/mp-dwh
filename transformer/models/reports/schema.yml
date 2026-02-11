@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: rpt_rebooking_m
+    description: "Mentor performance metrics showing rebooking rates within 30 days of first mentoring session"
+    columns:
+      - name: tier
+        description: "Mentor service tier level"
+      - name: tier_category
+        description: "Simplified tier classification (top_tier/standard_tier)"
+      - name: total_users_w_sessions
+        description: "Count of unique users who had sessions with this tier"
+      - name: rebooked_count
+        description: "Count of users who rebooked within 30 days"
+      - name: rebooking_rate_pct
+        description: "Rebooking rate percentage (rebooked_count / total_users_w_sessions * 100)"
+
+  - name: rpt_rebooking_b
+    description: "Mentor performance metrics showing rebooking rates within 30 days of first booking session"

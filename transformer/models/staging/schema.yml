@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: "3rd party tool booking events data with event time and session ID"
+    columns:
+      - name: event_id
+        description: "Unique identifier for the event"
+        tests:
+          - unique
+          - not_null
+      - name: event_type
+        description: "Type of event that occurred"
+        tests:
+          - not_null
+      - name: event_time
+        description: "Timestamp when event occurred"
+      - name: event_date
+        description: "Date when event occurred"
+      - name: user_id
+        description: "ID of user associated with event"
+        tests:
+          - not_null
+      - name: mentor_id
+        description: "ID of mentor associated with event"
+        tests:
+          - not_null
+      - name: session_id
+        description: "Surrogate key for session identifier"
+
+  - name: stg_mentors
+    description: "Ops mentors data with tier definition"
+    columns:
+      - name: mentor_id
+        description: "Unique mentor identifier"
+        tests:
+          - unique
+          - not_null
+      - name: tier
+        description: "Mentor service tier level"
+      - name: hourly_rate
+        description: "Hourly rate in decimal format"
+
+  - name: stg_users
+    description: "Postgres users data from backend"
+    columns:
+      - name: user_id
+        description: "Unique user identifier as text"
+        tests:
+          - unique
+          - not_null
+      - name: company_id
+        description: "Company affiliation ID"
+      - name: signup_date
+        description: "Date user signed up"
+        data_type: date
+      - name: status
+        description: "Current user account status"

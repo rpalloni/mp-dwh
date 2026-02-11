@@ -1,0 +1,7 @@
+services:
+  mp-dwh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mp-dwh
+    container_name: mp-dwh

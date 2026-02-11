@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: dim_mentors
+    description: "Dimension table for mentors with tier categorization"
+    columns:
+      - name: mentor_id
+        description: "Unique mentor identifier"
+        tests:
+          - unique
+          - not_null
+      - name: tier
+        description: "Mentor service tier level"
+        tests:
+          - not_null
+      - name: hourly_rate
+        description: "Mentor hourly rate"
+        data_type: decimal(10,2)
+      - name: tier_category
+        description: "Simplified tier classification (top_tier/standard_tier)"
+
+  - name: dim_users
+    description: "Dimension table for users with activity flag"
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        tests:
+          - unique
+          - not_null
+      - name: company_id
+        description: "Company affiliation ID"
+      - name: signup_date
+        description: "User signup date"
+        data_type: date
+      - name: status
+        description: "User account status"
+        tests:
+          - not_null
+      - name: is_active
+        description: "Boolean flag for active user status"
+
+  - name: fct_mentoring_sessions
+    description: "Fact table for mentoring sessions with duration metrics"
+    columns:
+      - name: session_id
+        description: "Unique session identifier"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Foreign key to dim_users"
+        tests:
+          - not_null
+      - name: mentor_id
+        description: "Foreign key to dim_mentors"
+        tests:
+          - not_null
+      - name: session_date
+        description: "Date of session"
+      - name: started_at
+        description: "Session start timestamp"
+        tests:
+          - not_null
+      - name: ended_at
+        description: "Session end timestamp (default 30min if missing)"
+      - name: has_end_event
+        description: "Flag indicating explicit end event exists"
+      - name: duration_minutes
+        description: "Session duration in minutes"
+      - name: session_sequence
+        description: "Sequential number of sessions per user"
+    
+  - name: fct_booking_sessions
+    description: "Fact table for booking sessions with booking requested, cancelled, confirmed"
