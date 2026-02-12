@@ -29,7 +29,15 @@ Booking system reliability looks good despite some minor data inconsistencies an
 | Bronze| standard_tier | 33                     | 0              | 0.0                |
 
 
+## How to Run with Docker
+docker server installed and running locally
+```
+git clone <repo> && cd <project-dir>
+docker compose up --build
+```
+
 ## How to Run Locally
+install [uv](https://docs.astral.sh/uv/)
 ```
 git clone <repo> && cd <project-dir>
 uv sync
@@ -50,9 +58,3 @@ uv run src/workflow.py test
 uv run src/workflow.py report
 ```
 
-## How to Run with Docker
-docker server running locally
-```
-git clone <repo> && cd <project-dir>
-docker compose up --build
-```
