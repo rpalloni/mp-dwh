@@ -71,4 +71,28 @@ models:
         description: "Sequential number of sessions per user"
     
   - name: fct_booking_sessions
-    description: "Fact table for booking sessions with booking requested, cancelled, confirmed"
+    description: "Fact table for booking sessions with booking requested, cancelled, confirmed (and deduplication)"
+    columns:
+      - name: session_id
+        description: "Unique session identifier"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Foreign key to dim_users"
+        tests:
+          - not_null
+      - name: mentor_id
+        description: "Foreign key to dim_mentors"
+        tests:
+          - not_null
+      - name: booking_requested_date
+        description: "Date of booking request"
+      - name: booking_cancelled_date
+        description: "Date of booking cancelled if any"
+      - name: booking_confirmed_date
+        description: "Date of booking confirmation"
+      - name: is_cancelled
+        description: "Flag indicating request was cancelled"
+      - name: session_sequence
+        description: "Sequential number of sessions per user"

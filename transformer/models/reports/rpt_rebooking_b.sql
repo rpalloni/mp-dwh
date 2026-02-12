@@ -7,6 +7,7 @@ first_sessions AS (
     , mentor_id
     , MIN(booking_requested_date) AS first_session_date
   FROM {{ ref('fct_booking_sessions') }}
+  WHERE is_cancelled = FALSE
   GROUP BY 1, 2
 ),
 user_sessions AS (
@@ -19,6 +20,7 @@ user_sessions AS (
   FROM first_sessions f
   LEFT JOIN {{ ref('fct_booking_sessions') }} s 
     ON f.user_id = s.user_id
+  WHERE is_cancelled = FALSE
   GROUP BY 1, 2
 )
 SELECT 

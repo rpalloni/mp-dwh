@@ -18,6 +18,7 @@ The next first two tools to add are:
 
 ## Results
 Top tier mentors show a **62% rebooking rate** compared to the **24% (combined)** of standard mentors. \
+This is confirmed in both calculation approaches (using booking sessions or mentoring sessions) with only minor difference. \
 Results are shown by tier to highlight the relatively good performance of silver mentors and the alarming one of bronze. \
 Booking system reliability looks good despite some minor data inconsistencies and several possible improvements (see `stg_events`).
 

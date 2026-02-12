@@ -5,7 +5,7 @@ first_sessions AS (
   SELECT 
     user_id
     , mentor_id
-    , MIN(started_at) AS first_session_date
+    , MIN(started_at) :: DATE AS first_session_date
   FROM {{ ref('fct_mentoring_sessions') }}
   GROUP BY 1, 2
 ),

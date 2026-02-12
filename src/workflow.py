@@ -1,7 +1,6 @@
 import subprocess
 import typer
 import duckdb
-import polars as pl
 from pathlib import Path
 from rich.console import Console
 from rich.panel import Panel
@@ -50,15 +49,15 @@ def full():
 @app.command()
 def report():
     """Run analysis"""
-    rprint(Panel("📊 Rebooking Analysis Report", style="yellow"))
+    rprint(Panel("📊 Rebooking Analysis Reports", style="yellow"))
     subprocess.run(["dbt", "run", "-s", "rpt_rebooking_m", "rpt_rebooking_b"], cwd=project_root, check=True)
     
     con = duckdb.connect("warehouse.duckdb")
-    df = con.execute("SELECT * FROM dbt_reports.rpt_rebooking_m ORDER BY rebooking_rate_pct DESC").pl()
-    dfb = con.execute("SELECT * FROM dbt_reports.rpt_rebooking_b ORDER BY rebooking_rate_pct DESC").pl()
+    results_mentoring = con.execute("SELECT * FROM dbt_reports.rpt_rebooking_m ORDER BY rebooking_rate_pct DESC").pl()
+    results_booking = con.execute("SELECT * FROM dbt_reports.rpt_rebooking_b ORDER BY rebooking_rate_pct DESC").pl()
     
-    print(df)
-    print(dfb)
+    rprint("Mentoring sessions approach -", results_mentoring)
+    rprint("Booking sessions approach -", results_booking)
 
 if __name__ == "__main__":
     app()
