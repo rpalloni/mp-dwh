@@ -23,7 +23,7 @@ def run():
     """Step 2: Run dbt models"""
     rprint(Panel("🔨 Step 2: Building dbt models", style="blue"))
     subprocess.run(
-        ["dbt", "run", "-s" "+dim_mentors", "+dim_users", "+fct_mentoring_sessions", "+fct_booking_sessions"],
+        ["dbt", "run", "-s", "+dim_mentors", "+dim_users", "+fct_mentoring_sessions", "+fct_booking_sessions"], # MacOs local add "--profiles-dir", ".",
         cwd=project_root, check=True
     )
     rprint(Panel("✅ Mart models built successfully!", style="green"))
@@ -50,7 +50,7 @@ def full():
 def report():
     """Run analysis"""
     rprint(Panel("📊 Rebooking Analysis Reports", style="yellow"))
-    subprocess.run(["dbt", "run", "-s", "rpt_rebooking_m", "rpt_rebooking_b"], cwd=project_root, check=True)
+    subprocess.run(["dbt", "run", "-s", "rpt_rebooking_m", "rpt_rebooking_b"], cwd=project_root, check=True) # MacOs local add "--profiles-dir", ".",
     
     con = duckdb.connect("warehouse.duckdb")
     results_mentoring = con.execute("SELECT * FROM dbt_reports.rpt_rebooking_m ORDER BY rebooking_rate_pct DESC").pl()
