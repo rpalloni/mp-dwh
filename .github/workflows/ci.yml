@@ -1,0 +1,29 @@
+name: CI - Data Pipeline Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+    
+    - name: Install dependencies with uv
+      run: |
+        uv sync --all-extras --dev-dependencies
+    
+    - name: Run dbt tests
+      run: |
+        cd mp-dwh
+        dbt test -s +stg_users +stg_mentors +stg_events
