@@ -21,7 +21,7 @@ jobs:
     
     - name: Install dependencies with uv
       run: |
-        uv sync --all-extras --dev-dependencies
+        uv sync
     
     - name: Run dbt tests
       run: |
