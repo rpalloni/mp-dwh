@@ -25,5 +25,5 @@ jobs:
     
     - name: Run dbt tests
       run: |
-        cd mp-dwh
+        cd mp-dwh/transformer
         dbt test -s +stg_users +stg_mentors +stg_events
