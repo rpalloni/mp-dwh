@@ -23,7 +23,6 @@ jobs:
       run: |
         uv sync
     
-    - name: Run dbt tests
+    - name: Run pipeline
       run: |
-        cd mp-dwh/transformer
-        dbt test -s +stg_users +stg_mentors +stg_events
+        uv run src/workflow.py full && uv run src/workflow.py report
